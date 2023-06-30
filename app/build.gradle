@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    defaultConfig {
+        applicationId "com.wapchief.qiniuplayer"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters "armeabi","armeabi-v7a"
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs=[]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation files('libs/pldroid-player-2.0.6.jar')
+    //工具
+    implementation 'com.github.vondear:RxTools:v1.7.6.4'
+    //GSY播放器
+    implementation 'com.shuyu:GSYVideoPlayer:3.0.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    //支持下载，解析
+    implementation 'com.jwkj:M3U8Manger:v2.3.0'
+    //JiaoZi播放器支持，清晰度切换，倍速播放
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.7'
+    //ijk播放器
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //PDF
+    implementation 'es.voghdev.pdfviewpager:library:1.0.3'
+    //bilibili弹幕
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
+    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
+}
